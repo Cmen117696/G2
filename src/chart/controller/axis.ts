@@ -41,6 +41,9 @@ const DEFAULT_ANIMATE_CFG = {
   }, // 更新时销毁动画配置
 };
 
+// update 组件的时候，忽略的数据更新
+const OMIT_CFG = ['container', 'start', 'end'];
+
 /**
  * G2 Axis controller, will:
  *  - create component
@@ -204,7 +207,7 @@ export default class Axis extends Controller<Option> {
       // 存在则更新
       if (axis) {
         const cfg = this.getLineAxisCfg(scale, xAxisOption, direction);
-        omit(cfg, ['container']);
+        omit(cfg, OMIT_CFG);
         axis.component.update(cfg);
         updatedCache.set(axisId, axis);
       } else {
@@ -219,7 +222,7 @@ export default class Axis extends Controller<Option> {
       // 存在则更新
       if (grid) {
         const cfg = this.getLineGridCfg(scale, xAxisOption, direction, dim);
-        omit(cfg, ['container']);
+        omit(cfg, OMIT_CFG);
         grid.component.update(cfg);
         updatedCache.set(gridId, grid);
       } else {
@@ -236,7 +239,7 @@ export default class Axis extends Controller<Option> {
       // 存在则更新
       if (axis) {
         const cfg = this.getCircleAxisCfg(scale, xAxisOption, direction);
-        omit(cfg, ['container']);
+        omit(cfg, OMIT_CFG);
         axis.component.update(cfg);
         updatedCache.set(axisId, axis);
       } else {
@@ -251,7 +254,7 @@ export default class Axis extends Controller<Option> {
       // 存在则更新
       if (grid) {
         const cfg = this.getCircleGridCfg(scale, xAxisOption, direction, dim);
-        omit(cfg, ['container']);
+        omit(cfg, OMIT_CFG);
         grid.component.update(cfg);
         updatedCache.set(gridId, grid);
       } else {
@@ -295,7 +298,7 @@ export default class Axis extends Controller<Option> {
           // 存在则更新
           if (axis) {
             const cfg = this.getLineAxisCfg(scale, yAxisOption, direction);
-            omit(cfg, ['container']);
+            omit(cfg, OMIT_CFG);
             axis.component.update(cfg);
             updatedCache.set(axisId, axis);
           } else {
@@ -310,7 +313,7 @@ export default class Axis extends Controller<Option> {
           // 存在则更新
           if (grid) {
             const cfg = this.getLineGridCfg(scale, yAxisOption, direction, dim);
-            omit(cfg, ['container']);
+            omit(cfg, OMIT_CFG);
             grid.component.update(cfg);
             updatedCache.set(gridId, grid);
           } else {
@@ -328,7 +331,7 @@ export default class Axis extends Controller<Option> {
           if (axis) {
             // @ts-ignore
             const cfg = this.getLineAxisCfg(scale, yAxisOption, 'radius');
-            omit(cfg, ['container']);
+            omit(cfg, OMIT_CFG);
             axis.component.update(cfg);
             updatedCache.set(axisId, axis);
           } else {
@@ -345,7 +348,7 @@ export default class Axis extends Controller<Option> {
           if (grid) {
             // @ts-ignore
             const cfg = this.getCircleGridCfg(scale, yAxisOption, 'radius', dim);
-            omit(cfg, ['container']);
+            omit(cfg, OMIT_CFG);
             grid.component.update(cfg);
             updatedCache.set(gridId, grid);
           } else {
