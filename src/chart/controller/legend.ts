@@ -84,6 +84,9 @@ export default class Legend extends Controller<Option> {
       const [x1, y1] = directionToPosition(this.view.coordinateBBox, bbox, direction);
       const [x2, y2] = directionToPosition(this.view.viewBBox, bbox, direction);
 
+      const layout = getLegendLayout(direction);
+      const maxSize = this.getCategoryLegendSizeCfg(layout);
+
       let x = 0;
       let y = 0;
 
@@ -99,6 +102,8 @@ export default class Legend extends Controller<Option> {
       component.update({
         x,
         y,
+        ...maxSize,
+        flipPage: true,
       });
     });
   }
@@ -410,15 +415,16 @@ export default class Legend extends Controller<Option> {
   }
 
   private getCategoryLegendSizeCfg(layout: 'horizontal' | 'vertical') {
-    const { width, height } = this.view.viewBBox;
+    const { width: vw, height: vh } = this.view.viewBBox;
+    const { width: cw, height: ch } = this.view.coordinateBBox;
     return layout === 'vertical'
       ? {
-          maxWidth: width * COMPONENT_MAX_VIEW_PERCENTAGE,
-          maxHeight: height,
+          maxWidth: vw * COMPONENT_MAX_VIEW_PERCENTAGE,
+          maxHeight: ch,
         }
       : {
-          maxWidth: width,
-          maxHeight: height * COMPONENT_MAX_VIEW_PERCENTAGE,
+          maxWidth: cw,
+          maxHeight: vh * COMPONENT_MAX_VIEW_PERCENTAGE,
         };
   }
 }

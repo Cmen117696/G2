@@ -107,4 +107,31 @@ describe('Legend', () => {
     expect(legends[0].component.getBBox().minX).toBeGreaterThanOrEqual(0);
     expect(legends[0].component.get('animate')).toBe(true);
   });
+
+  it.only('legend maxWidth', () => {
+    const data = [
+      { genre: 'Sports', sold: 275 },
+      { genre: 'Strategy', sold: 115 },
+      { genre: 'Action', sold: 120 },
+      { genre: 'Shooter', sold: 3500 },
+      { genre: 'Other', sold: 150 }
+    ];
+
+    const chart = new Chart({
+      container: createDiv(),
+      autoFit: false,
+      width: 380,
+      height: 300,
+    });
+
+    chart.data(data);
+    chart.scale('sold', {
+      max: 3600,
+      nice: false,
+    });
+    // chart.coordinate().transpose();
+    chart.interval().position('genre*sold').color('genre').label('sold');
+
+    chart.render();
+  })
 });

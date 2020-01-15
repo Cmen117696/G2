@@ -176,6 +176,7 @@ const LEGEND_STYLE = {
       textBaseline: 'middle',
     },
   },
+  flipPage: true,
   animate: false,
 };
 
